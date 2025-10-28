@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-secondary-200;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-white text-secondary-900 antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-secondary-50;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-secondary-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-secondary-400;
+  }
+}
+
+@layer components {
+
+  /* Modern Button Styles */
+  .btn {
+    @apply inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-sm {
+    @apply btn px-3 py-1.5 text-sm rounded-lg;
+  }
+
+  .btn-md {
+    @apply btn px-4 py-2 text-sm rounded-lg;
+  }
+
+  .btn-lg {
+    @apply btn px-6 py-3 text-base rounded-xl;
+  }
+
+  .btn-primary {
+    @apply btn-md bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white shadow-button hover:shadow-button-hover focus:ring-primary-500;
+  }
+
+  .btn-secondary {
+    @apply btn-md bg-white hover:bg-secondary-50 active:bg-secondary-100 text-secondary-700 border border-secondary-300 shadow-button hover:shadow-button-hover focus:ring-secondary-500;
+  }
+
+  .btn-ghost {
+    @apply btn-md bg-transparent hover:bg-secondary-100 active:bg-secondary-200 text-secondary-700 focus:ring-secondary-500;
+  }
+
+  .btn-success {
+    @apply btn-md bg-success-600 hover:bg-success-700 active:bg-success-800 text-white shadow-button hover:shadow-button-hover focus:ring-success-500;
+  }
+
+  .btn-warning {
+    @apply btn-md bg-warning-500 hover:bg-warning-600 active:bg-warning-700 text-white shadow-button hover:shadow-button-hover focus:ring-warning-500;
+  }
+
+  .btn-error {
+    @apply btn-md bg-error-600 hover:bg-error-700 active:bg-error-800 text-white shadow-button hover:shadow-button-hover focus:ring-error-500;
+  }
+
+  /* Modern Card Styles */
+  .card {
+    @apply bg-white rounded-xl shadow-card border border-secondary-200/50 overflow-hidden;
+  }
+
+  .card-hover {
+    @apply card hover:shadow-card-hover hover:border-secondary-300/50 transition-all duration-200;
+  }
+
+  .card-interactive {
+    @apply card-hover cursor-pointer hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .card-header {
+    @apply px-6 py-4 border-b border-secondary-200/50 bg-secondary-50/50;
+  }
+
+  .card-body {
+    @apply px-6 py-4;
+  }
+
+  .card-footer {
+    @apply px-6 py-4 border-t border-secondary-200/50 bg-secondary-50/30;
+  }
+
+  /* Modern Input Styles */
+  .input {
+    @apply w-full px-3 py-2 border border-secondary-300 rounded-lg bg-white text-secondary-900 placeholder-secondary-500 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500;
+  }
+
+  .input-lg {
+    @apply input px-4 py-3 text-base rounded-xl;
+  }
+
+  .input-error {
+    @apply input border-error-300 focus:ring-error-500 focus:border-error-500;
+  }
+
+  .input-success {
+    @apply input border-success-300 focus:ring-success-500 focus:border-success-500;
+  }
+
+  /* Modern Navigation */
+  .nav-item {
+    @apply flex items-center px-3 py-2 text-sm font-medium text-secondary-700 rounded-lg hover:bg-secondary-100 hover:text-secondary-900 transition-all duration-200;
+  }
+
+  .nav-item-active {
+    @apply nav-item bg-primary-50 text-primary-700 hover:bg-primary-100 hover:text-primary-800;
+  }
+
+  /* Modern Sidebar */
+  .sidebar-item {
+    @apply flex items-center px-3 py-2.5 text-sm font-medium text-secondary-600 rounded-xl hover:bg-secondary-100 hover:text-secondary-900 transition-all duration-200;
+  }
+
+  .sidebar-item-active {
+    @apply sidebar-item bg-primary-50 text-primary-700 hover:bg-primary-100 hover:text-primary-800 shadow-sm;
+  }
+
+  /* Modern Stats */
+  .stat-card {
+    @apply card-hover p-6 animate-fade-in;
+  }
+
+  .stat-value {
+    @apply text-2xl font-bold text-secondary-900 mb-1;
+  }
+
+  .stat-label {
+    @apply text-sm font-medium text-secondary-500 uppercase tracking-wide;
+  }
+
+  .stat-change {
+    @apply text-xs font-medium flex items-center mt-2;
+  }
+
+  .stat-change-positive {
+    @apply stat-change text-success-600;
+  }
+
+  .stat-change-negative {
+    @apply stat-change text-error-600;
+  }
+
+  .stat-change-neutral {
+    @apply stat-change text-secondary-500;
+  }
+
+  /* Modern Badges */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply badge bg-primary-100 text-primary-800;
+  }
+
+  .badge-success {
+    @apply badge bg-success-100 text-success-800;
+  }
+
+  .badge-warning {
+    @apply badge bg-warning-100 text-warning-800;
+  }
+
+  .badge-error {
+    @apply badge bg-error-100 text-error-800;
+  }
+
+  .badge-secondary {
+    @apply badge bg-secondary-100 text-secondary-800;
+  }
+
+  /* Modern Loading States */
+  .loading-spinner {
+    @apply animate-spin rounded-full border-2 border-secondary-200 border-t-primary-600;
+  }
+
+  .loading-pulse {
+    @apply animate-pulse bg-secondary-200 rounded;
+  }
+
+  /* Modern Gradients */
+  .gradient-primary {
+    @apply bg-gradient-to-r from-primary-600 to-primary-700;
+  }
+
+  .gradient-secondary {
+    @apply bg-gradient-to-r from-secondary-600 to-secondary-700;
+  }
+
+  .gradient-success {
+    @apply bg-gradient-to-r from-success-600 to-success-700;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
