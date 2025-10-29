@@ -45,10 +45,10 @@ interface Payroll {
 export default function PayrollPage() {
   const [payrolls, setPayrolls] = useState<Payroll[]>([]);
   const [employees, setEmployees] = useState<Employee[]>([]);
-  
+
   // Ensure employees is always an array
   const safeEmployees = Array.isArray(employees) ? employees : [];
-  
+
   // Debug logging
   console.log('Employees state:', employees);
   console.log('Safe employees:', safeEmployees);
@@ -101,7 +101,7 @@ export default function PayrollPage() {
       }
       const data = await response.json();
       console.log('Fetched employees data:', data);
-      
+
       if (Array.isArray(data) && data.length === 0) {
         // Initialize default employees if none exist
         await fetch('/api/employees/setup', { method: 'POST' });
@@ -120,24 +120,24 @@ export default function PayrollPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const payrollData = {
       ...formData,
       grossSalary: formData.basicSalary + formData.hra + formData.allowances,
       deductions: {
         ...formData.deductions,
-        total: formData.deductions.tds + formData.deductions.pf + formData.deductions.esi + 
-               formData.deductions.professionalTax + formData.deductions.other
+        total: formData.deductions.tds + formData.deductions.pf + formData.deductions.esi +
+          formData.deductions.professionalTax + formData.deductions.other
       },
-      netSalary: (formData.basicSalary + formData.hra + formData.allowances) - 
-                 (formData.deductions.tds + formData.deductions.pf + formData.deductions.esi + 
-                  formData.deductions.professionalTax + formData.deductions.other)
+      netSalary: (formData.basicSalary + formData.hra + formData.allowances) -
+        (formData.deductions.tds + formData.deductions.pf + formData.deductions.esi +
+          formData.deductions.professionalTax + formData.deductions.other)
     };
 
     try {
       const url = editingPayroll ? `/api/payroll/${editingPayroll._id}` : '/api/payroll';
       const method = editingPayroll ? 'PUT' : 'POST';
-      
+
       const response = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
@@ -211,7 +211,7 @@ export default function PayrollPage() {
 
   const filteredPayrolls = (payrolls || []).filter(payroll => {
     const matchesSearch = payroll.employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         payroll.employee.employeeId.toLowerCase().includes(searchTerm.toLowerCase());
+      payroll.employee.employeeId.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'all' || payroll.status === statusFilter;
     const matchesMonth = monthFilter === 'all' || payroll.month === monthFilter;
     return matchesSearch && matchesStatus && matchesMonth;
@@ -358,7 +358,7 @@ export default function PayrollPage() {
               <h2 className="text-xl font-bold mb-4">
                 {editingPayroll ? 'Edit Payroll' : 'Create New Payroll'}
               </h2>
-              
+
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -367,8 +367,8 @@ export default function PayrollPage() {
                       value={formData.employee}
                       onChange={(e) => {
                         const selectedEmployee = safeEmployees.find(emp => emp._id === e.target.value);
-                        setFormData({ 
-                          ...formData, 
+                        setFormData({
+                          ...formData,
                           employee: e.target.value,
                           basicSalary: selectedEmployee?.salary.basic || 0,
                           hra: selectedEmployee?.salary.hra || 0,
@@ -536,18 +536,18 @@ export default function PayrollPage() {
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div className="flex justify-between">
                       <span>Gross Salary:</span>
-                      <span>₹{(formData.basicSalary + formData.hra + formData.allowances).toFixed(2)}</span>
+                      <span>₹{(formData?.basicSalary + formData?.hra + formData?.allowances)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Total Deductions:</span>
-                      <span>₹{(formData.deductions.tds + formData.deductions.pf + formData.deductions.esi + 
-                            formData.deductions.professionalTax + formData.deductions.other).toFixed(2)}</span>
+                      <span>₹{(formData.deductions.tds + formData.deductions.pf + formData.deductions.esi +
+                        formData.deductions.professionalTax + formData.deductions.other).toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between font-bold text-lg border-t pt-2 col-span-2">
                       <span>Net Salary:</span>
-                      <span>₹{((formData.basicSalary + formData.hra + formData.allowances) - 
-                            (formData.deductions.tds + formData.deductions.pf + formData.deductions.esi + 
-                             formData.deductions.professionalTax + formData.deductions.other)).toFixed(2)}</span>
+                      <span>₹{((formData.basicSalary + formData.hra + formData.allowances) -
+                        (formData.deductions.tds + formData.deductions.pf + formData.deductions.esi +
+                          formData.deductions.professionalTax + formData.deductions.other)).toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
@@ -647,7 +647,7 @@ export default function PayrollPage() {
                   ))}
                 </tbody>
               </table>
-              
+
               {filteredPayrolls.length === 0 && (
                 <div className="p-8 text-center text-gray-500">
                   No payroll records found. Create your first payroll record to get started.
